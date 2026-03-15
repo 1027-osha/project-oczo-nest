@@ -30,6 +30,7 @@ import {v4 as uuid} from 'uuid';
  
 ]
   create(createProductDto: CreateProductDto) {
+    if(!createProductDto.productId) createProductDto.productId = uuid()
     createProductDto.productId=uuid();
     this.products.push(createProductDto)
     return createProductDto;
@@ -53,11 +54,17 @@ import {v4 as uuid} from 'uuid';
 
   update(id: string, updateProductDto: UpdateProductDto) {
      let product = this.findOne(id) 
-       product  = {
-        ...product,
+     this.products=this.products.map((product)=>{
+      if (product.productId === id) return {
+...product,
         ... updateProductDto,
-        }   
-          return product
+      }
+      return product;
+     })
+          return {
+            ...product,
+        ... updateProductDto,
+          }
         }
   
 
