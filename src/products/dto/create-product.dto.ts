@@ -7,7 +7,7 @@ export class CreateProductDto {
     productId: string;
     @IsString()
     @MaxLength(40)
-    prodcutName: string;
+    productName: string;
     @IsNumber()
     price: number;
     @IsInt()
